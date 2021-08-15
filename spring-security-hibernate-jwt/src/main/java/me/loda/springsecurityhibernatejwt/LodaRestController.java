@@ -8,25 +8,19 @@ package me.loda.springsecurityhibernatejwt;
  *    Xin cảm ơn!
  *******************************************************/
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import me.loda.springsecurityhibernatejwt.jwt.JwtTokenProvider;
 import me.loda.springsecurityhibernatejwt.payload.LoginRequest;
 import me.loda.springsecurityhibernatejwt.payload.LoginResponse;
 import me.loda.springsecurityhibernatejwt.payload.RandomStuff;
 import me.loda.springsecurityhibernatejwt.user.CustomUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Copyright 2019 {@author Loda} (https://loda.me).
@@ -46,7 +40,7 @@ public class LodaRestController {
     private JwtTokenProvider tokenProvider;
 
     @PostMapping("/login")
-    public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
 
         // Xác thực thông tin người dùng Request lên
         Authentication authentication = authenticationManager.authenticate(
@@ -67,7 +61,7 @@ public class LodaRestController {
 
     // Api /api/random yêu cầu phải xác thực mới có thể request
     @GetMapping("/random")
-    public RandomStuff randomStuff(){
+    public RandomStuff randomStuff() {
         return new RandomStuff("JWT Hợp lệ mới có thể thấy được message này");
     }
 

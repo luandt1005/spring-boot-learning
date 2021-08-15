@@ -44,5 +44,11 @@ public class App implements CommandLineRunner {
         user.setPassword(passwordEncoder.encode("loda"));
         userRepository.save(user);
         System.out.println(user);
+
+        user = new User();
+        user.setUsername("luandt");
+        user.setPassword(passwordEncoder.encode("1"));
+        userRepository.save(user);
+        System.out.println(user);
     }
 }

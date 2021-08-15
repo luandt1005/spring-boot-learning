@@ -8,13 +8,13 @@ package me.loda.springsecurityhibernatejwt.user;
  *    Xin cảm ơn!
  *******************************************************/
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 /**
  * Copyright 2019 {@author Loda} (https://loda.me).
@@ -30,11 +30,11 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Kiểm tra xem user có tồn tại trong database không?
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
         return new CustomUserDetails(user);
     }
