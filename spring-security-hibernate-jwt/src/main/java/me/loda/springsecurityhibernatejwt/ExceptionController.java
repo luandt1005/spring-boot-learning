@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ExceptionController {
 
-    // Catch Other Exception
     @ExceptionHandler(Exception.class)
     public String globalException(HttpServletRequest request, Throwable ex) {
         return ex.toString();
