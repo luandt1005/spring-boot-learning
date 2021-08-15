@@ -58,8 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         /*auth.userDetailsService(userService) // Cung cáp userservice cho spring security
             .passwordEncoder(passwordEncoder()); // cung cấp password encoder*/
 
