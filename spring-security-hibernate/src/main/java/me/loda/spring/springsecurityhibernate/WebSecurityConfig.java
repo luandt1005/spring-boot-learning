@@ -1,23 +1,23 @@
 package me.loda.spring.springsecurityhibernate;
 /*******************************************************
  * For Vietnamese readers:
- *    Các bạn thân mến, mình rất vui nếu project này giúp 
- * ích được cho các bạn trong việc học tập và công việc. Nếu 
- * bạn sử dụng lại toàn bộ hoặc một phần source code xin để 
+ *    Các bạn thân mến, mình rất vui nếu project này giúp
+ * ích được cho các bạn trong việc học tập và công việc. Nếu
+ * bạn sử dụng lại toàn bộ hoặc một phần source code xin để
  * lại dường dẫn tới github hoặc tên tác giá.
  *    Xin cảm ơn!
  *******************************************************/
 
+import me.loda.spring.springsecurityhibernate.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import me.loda.spring.springsecurityhibernate.user.UserService;
 
 /**
  * Copyright 2019 {@author Loda} (https://loda.me).
@@ -59,5 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout() // Cho phép logout
                 .permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/h2-console/**");
     }
 }
